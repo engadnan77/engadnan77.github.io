@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الشركة العامة لنقل الطاقة الكهربائية</title>
+<style>
+  body { font-family: system-ui, sans-serif; background:#0f172a; color:#e2e8f0; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; }
+  .box { text-align:center; max-width:420px; padding:2rem; }
+  .spin { width:42px; height:42px; border:4px solid #334155; border-top-color:#38bdf8; border-radius:50%; margin:0 auto 1.2rem; animation:s 1s linear infinite; }
+  @keyframes s { to { transform:rotate(360deg) } }
+  h1 { font-size:1.25rem; font-weight:600; }
+  p { color:#94a3b8; font-size:.9rem; line-height:1.7; }
+  a { color:#38bdf8; }
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="spin" id="s"></div>
+  <h1 id="t">جاري تحويلك إلى نظام شبكة الكهرباء…</h1>
+  <p id="m">Redirecting to Iraq Grid System…</p>
+</div>
+<script>
+var GIST = "4e6d02e1fd960536292a7f6c79a8f486";
+fetch("https://api.github.com/gists/" + GIST)
+  .then(function(r){ return r.json(); })
+  .then(function(g){
+    var c = JSON.parse(g.files["iraq-grid-url.json"].content);
+    if (c && c.url) { location.replace(c.url); }
+    else { throw 0; }
+  })
+  .catch(function(){
+    document.getElementById("s").style.display = "none";
+    document.getElementById("t").textContent = "النظام غير متاح حالياً";
+    document.getElementById("m").textContent = "The system is currently offline. Please try again later.";
+  });
+</script>
+</body>
+</html>
